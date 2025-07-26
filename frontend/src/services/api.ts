@@ -1,6 +1,6 @@
 import { DirectoryInfo, MarkdownContent, SearchResult } from '../types'
 
-const API_BASE_URL = import.meta.env.PROD ? 'http://localhost:50858/api' : '/api'
+const API_BASE_URL = import.meta.env.PROD ? `${window.location.protocol}//${window.location.hostname}:50858/api` : '/api'
 
 class ApiService {
   private async fetchJson<T>(url: string): Promise<T> {
@@ -27,7 +27,7 @@ class ApiService {
   }
 
   async healthCheck(): Promise<{ status: string; service: string }> {
-    const healthUrl = import.meta.env.PROD ? 'http://localhost:50858/health' : '/health'
+    const healthUrl = import.meta.env.PROD ? `${window.location.protocol}//${window.location.hostname}:50858/health` : '/health'
     return this.fetchJson(healthUrl)
   }
 }
